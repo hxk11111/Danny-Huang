@@ -27,6 +27,9 @@ l = [1, -2, 3, 10, -4, 7, 2, -5]
 # print max_sublist(l)
 
 
+# 时间复杂度为O(n)，然后用三个索引记录起始位置和结束的位置
+# 当部分求和小于0时，更改备用start的索引
+# 当部分求和大于最大求和值更改start和end的索引
 def max_sublist2(list):
     max_sum = 0
     res = 0
