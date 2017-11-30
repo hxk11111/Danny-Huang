@@ -3,9 +3,6 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf, SQLContext
 import pandas as pd
 import datetime
-import re
-import jieba
-import numpy as np
 import jieba.analyse as ja
 
 
@@ -166,15 +163,15 @@ class UserSummary(object):
         for elem in data:
             user_keyword = ""
             uid_list.append(elem[0])
-            for word in elem[1][0][:-1]:
+            keywords = elem[1][0]
+            for word in keywords:
                 user_keyword += word
                 user_keyword += "_"
-            user_keyword += elem[1][0][-1]
             keywords_list.append(user_keyword)
             user_tag_list.append(elem[1][1])
 
         result_dict = {"uid": uid_list, "keywords": keywords_list, "user_tag": user_tag_list}
-        pd.DataFrame(result_dict, index=None).to_csv("/home/spark/hxkTest/spark_script/weibo_user_summary/tagged_user_keyword.csv")
+        pd.DataFrame(result_dict, index=None).to_csv("/home/spark/hxkTest/spark_script/weibo_user_summary/tagged_user_keyword.csv", encoding="utf-8")
 
 
 if __name__ == "__main__":

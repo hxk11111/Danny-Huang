@@ -17,7 +17,7 @@ class Weibo_Word2Vec(object):
         # prod
         self.spark = SparkSession.builder.config(
             conf=SparkConf().setAppName("weibo_w2vec")).getOrCreate()
-        self.days_list = self.dateRange("2017-10-16", "2017-11-21")
+        self.days_list = self.dateRange("2017-10-16", "2017-11-20")
         self.path = 'hdfs:///ssymmetry_db/raw_db/sina_weibo_fans/sina_weibo_fans_item/2017/%s/*'
         self.output = '/home/spark/hxkTest/out/'
 
