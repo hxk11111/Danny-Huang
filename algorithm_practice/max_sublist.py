@@ -22,4 +22,28 @@ def max_sublist(list):
 
 
 l = [1, -2, 3, 10, -4, 7, 2, -5]
-print max_sublist(l)
+
+
+# print max_sublist(l)
+
+
+def max_sublist2(list):
+    max_sum = 0
+    res = 0
+    start_raw = 0
+    start = 0
+    end = 0
+    for i in range(len(list)):
+        res += list[i]
+        if res >= 0:
+            if res > max_sum:
+                max_sum = res
+                start = start_raw
+                end = i
+        else:
+            res = 0
+            start_raw = i + 1
+    return list[start:end + 1], max_sum
+
+
+print max_sublist2(l)
