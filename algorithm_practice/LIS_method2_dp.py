@@ -16,6 +16,7 @@ def LIS(list_p):
         longest_index.append(index)
     return longest, longest_index
 
+
 l1 = [1, 4, 5, 7, 3]
 longest, longest_index = LIS(l1)
 print longest
@@ -25,4 +26,3 @@ for i in range(len(longest)):
         max_index = i
 for i in longest_index[max_index]:
     print l1[i]
-
