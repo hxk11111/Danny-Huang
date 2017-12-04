@@ -1,4 +1,4 @@
-#encoding=utf-8
+# encoding=utf-8
 from pyspark.sql import SparkSession
 from pyspark import SparkConf, SQLContext
 import pandas as pd
@@ -18,8 +18,8 @@ class UserSummary(object):
         self.spark = SparkSession.builder.config(
             conf=SparkConf().setAppName("weibo_user_summary")).getOrCreate()
         self.sql_context = SQLContext(sparkContext=self.spark.sparkContext)
-        self.days_list = self.dateRange("2017-10-16", "2017-10-21")
-        self.path = 'hdfs:///ssymmetry_db/raw_db/sina_weibo_fans/sina_weibo_fans_item/2017/%s/*'
+        self.days_list = ["2017-11-27"]
+        self.path = 'hdfs:///ssymmetry_db/raw_db/sina_weibo_login/sina_weibo_login_item/2017/%s/*'
         self.output = '/home/spark/hxkTest/out/'
 
     def dateRange(self, begin_date, end_date):
@@ -42,8 +42,8 @@ class UserSummary(object):
         return dataframe
 
     def read_blog_data(self, dataframe):
-        df = dataframe.filter("blog_id is not NULL").select('uid', 'blog_content',
-                                                            'forward_content').drop_duplicates().fillna(" ")
+        df = dataframe.filter(
+            "wid is not NULL").select('uid', 'weibo_content').drop_duplicates().fillna(" ")
         return df
 
     def main(self):
@@ -113,27 +113,17 @@ class UserSummary(object):
         dataframe = self.read_dataframe(self.path, self.days_list).persist()
         blog_df = self.read_blog_data(dataframe)
 
-        # read approved user list
-        approved_uid_df = self.spark.read.csv(
-            "hdfs:///ssymmetry_db/raw_db/sina_user_tag/sina_user_tag_item/approved_untagged.csv", header=True) \
-            .select("uid")
-
         # local test
-        # dataframe = self.spark.read.json("sina_weibo_fans_data_2017-11-09-10-18.json")
+        # dataframe = self.spark.read.json("sina_weibo_login_data_2017-12-04-01-49.json")
         # blog_df = self.read_blog_data(dataframe).fillna(" ")
-        # blog_rdd = blog_df.rdd
 
-        # select the blogs for the tagged users
-        tagged_user_blog = blog_df.join(approved_uid_df, blog_df.uid == approved_uid_df.uid).select(blog_df.uid,
-                                                                                                    blog_df.blog_content,
-                                                                                                    blog_df.forward_content)
         def preprocess_data(x):
             uid = x["uid"]
-            blog_content = x["blog_content"]
-            forward_content = x["forward_content"]
-            if forward_content.rfind(u"*****") > 0:
-                forward_content = forward_content.split(u"*****")[1]
-            return (uid, blog_content + forward_content)
+            blog_content = x["weibo_content"]
+            # forward_content = x["forward_content"]
+            # if forward_content.rfind(u"****") > 0:
+            #     forward_content = forward_content.split(u"****")[1]
+            return (uid, blog_content)
 
         def extract_keywords(x):
             uid = x[0]
@@ -148,7 +138,8 @@ class UserSummary(object):
             return (uid, keywords)
 
         # the rdd contains uid, keywords and the user_tag, next step we need to convert the keywords to a matrix
-        data = tagged_user_blog.rdd.map(preprocess_data).reduceByKey(lambda x, y: (x[0]+ y[0])).map(extract_keywords).collect()
+        data = blog_df.rdd.map(preprocess_data).reduceByKey(lambda x, y: (x + y)).map(
+            extract_keywords).collect()
 
         uid_list = []
         keywords_list = []
@@ -162,7 +153,10 @@ class UserSummary(object):
             keywords_list.append(user_keyword)
 
         result_dict = {"uid": uid_list, "keywords": keywords_list}
-        pd.DataFrame(result_dict, index=None).to_csv("/home/spark/hxkTest/spark_script/weibo_user_summary/untagged_approved_user_keyword.csv", encoding="utf-8")
+        pd.DataFrame(result_dict, index=None).to_csv(
+            "/home/spark/hxkTest/spark_script/weibo_user_summary/untagged_new_approved_user_keyword.csv", encoding="utf-8")
+
+        # pd.DataFrame(result_dict, index=None).to_csv("untagged_new_approved_user_keyword.csv", encoding="utf-8")
 
 
 if __name__ == "__main__":
