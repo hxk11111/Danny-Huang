@@ -5,11 +5,11 @@
 
 def LIS(list_p):
     longest = [1 for _ in range(len(list_p))]
-    longest_index = [[1]]
+    longest_index = [[0]]
     for i in range(1, len(list_p)):
         index = []
         for j in range(i):
-            if list_p[j] < list_p[i]:
+            if list_p[j] < list_p[i] and longest[i] < longest[j] + 1:
                 longest[i] += 1
                 index.append(j)
         index.append(i)
@@ -17,7 +17,7 @@ def LIS(list_p):
     return longest, longest_index
 
 
-l1 = [1, 4, 5, 7, 3]
+l1 = [5, 6, 7, 1, 2, 8]
 longest, longest_index = LIS(l1)
 print longest
 max_index = 0
