@@ -47,6 +47,6 @@ def KMP(str_l, str_s):
     return False
 
 
-str_l = "BBC ABCDAB ABCDABCDABDE"
-str_s = "ABCDABD"
+str_l = "ABCABCABCABCD"
+str_s = "ABCABCABCD"
 print KMP(str_l, str_s)
