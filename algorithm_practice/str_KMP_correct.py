@@ -21,3 +21,33 @@ def compute_next(string_p):
 
 
 print compute_next("ABCABCABCD")
+
+
+def kmp(string_l, string_s):
+    len_l = len(string_l)
+    len_s = len(string_s)
+    index = 0
+    next_l = compute_next(string_s)
+    flag = True
+    j = 0
+    while index <= len_l - len_s:
+        while j < len_s:
+            if string_l[index + j] == string_s[j]:
+                flag = True
+                j += 1
+                continue
+            if j:
+                flag = False
+                index = j + index - next_l[j - 1]
+                j = next_l[j - 1]
+                break
+            else:
+                index += 1
+                flag = False
+                break
+        if flag:
+            return True
+    return False
+
+print kmp("ABCABCABCABCD", "ABCABCABCD")
+print kmp("BBC ABCDAB ABCDABCDABDE", "ABCDAABD")

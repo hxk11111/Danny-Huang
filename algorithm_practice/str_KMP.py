@@ -17,26 +17,30 @@ def next_list_m2(str_p):
     str_prefix = [str_p[0:i + 1] for i in range(len(str_p) - 1)]
     str_latfix = [str_p[i + 1:] for i in range(len(str_p) - 1)]
     common = list(set(str_latfix) & set(str_prefix))
-    if common:
-        return len(common[-1])
-    return 0
+    if len(common) == 0:
+        return 0
+    else:
+        return max([len(item) for item in common])
 
-str_p = "bcbbcb"
+str_p = "ABCABCABC"
 print next_list_m2(str_p)
 
 
 def KMP(str_l, str_s):
     flag = True
     index = 0
-    while index < len(str_l) - len(str_s) - 1:
-        for j in range(len(str_s)):
+    j = 0
+    while index < len(str_l) - len(str_s) + 1:
+        while j < len(str_s):
             if str_l[index + j] == str_s[j]:
                 flag = True
+                j += 1
                 continue
             if j:
                 flag = False
-                move = next_list(str_s[:j])
+                move = next_list_m2(str_s[:j])
                 index = index + j - move
+                j = move
                 break
             else:
                 flag = False
@@ -48,5 +52,5 @@ def KMP(str_l, str_s):
 
 
 str_l = "ABCABCABCABCD"
-str_s = "ABCABCABCD"
+str_s = "ABCABCD"
 print KMP(str_l, str_s)
