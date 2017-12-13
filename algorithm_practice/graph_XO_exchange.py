@@ -16,7 +16,6 @@
 #           然后从四周的"O"开始，找它上下左右的"O"，如果找到做个标记，这个点在最终结果中一定还为"O"
 
 
-
 # 检验某一个节点是不是O
 def is_valid_O(matrix_p, j, i):
     rows = len(matrix_p)
