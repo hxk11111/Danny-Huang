@@ -12,7 +12,12 @@
     X O X X                 X O X X
 '''
 
+# 解题思路： 从四周的节点开始，如果有节点为"O"，做一个标记，这个节点一定在最终结果中还是"O"，它不会被"X"包围
+#           然后从四周的"O"开始，找它上下左右的"O"，如果找到做个标记，这个点在最终结果中一定还为"O"
 
+
+
+# 检验某一个节点是不是O
 def is_valid_O(matrix_p, j, i):
     rows = len(matrix_p)
     cols = len(matrix_p[0])
@@ -20,7 +25,7 @@ def is_valid_O(matrix_p, j, i):
         return False
     return True
 
-
+# 检验从某个节点还能不能继续访问，即它的上下左右还有没有O节点
 def could_continue(matrix_p, j, i):
     next_node = []
     next_move = [(j + 1, i), (j - 1, i), (j, i - 1), (j, i + 1)]
@@ -30,7 +35,7 @@ def could_continue(matrix_p, j, i):
             next_node.append((next_move[i][0], next_move[i][1]))
     return next_node
 
-
+# 从一个几点开始做广度优先遍历，看节点是否能从O变成X
 def bfs(matrix_p, m, n):
     queue = []
     if is_valid_O(matrix_p, m, n):
