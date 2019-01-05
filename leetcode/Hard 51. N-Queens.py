@@ -48,19 +48,16 @@ class Solution(object):
         if all(elem >= 0 for elem in rows):
             queens_result.append(["".join(["." if i != col else "Q" for i in range(len(rows))]) for col in rows])
             return
-        for ind, elem in enumerate(rows[row_ind:]):
-            if elem < 0:
-                for i in range(len(rows)):
-                    row_i = row_ind + ind
-                    col_i = i
-                    if self.is_valid(row_i, col_i, rows, diagonal, rev_diagonal):
-                        rows[row_i] = col_i
-                        diagonal[i + row_i] = 1
-                        rev_diagonal[i - row_i + len(rows) - 1] = 1
-                        self.dfs(queens_result, rows, row_i + 1, diagonal, rev_diagonal)
-                        rows[row_i] = -1
-                        diagonal[i + row_i] = -1
-                        rev_diagonal[i - row_i + len(rows) - 1] = -1
+        for i in range(len(rows)):
+            col_i = i
+            if self.is_valid(row_ind, col_i, rows, diagonal, rev_diagonal):
+                rows[row_ind] = col_i
+                diagonal[i + row_ind] = 1
+                rev_diagonal[i - row_ind + len(rows) - 1] = 1
+                self.dfs(queens_result, rows, row_ind + 1, diagonal, rev_diagonal)
+                rows[row_ind] = -1
+                diagonal[i + row_ind] = -1
+                rev_diagonal[i - row_ind + len(rows) - 1] = -1
 
     def solveNQueens(self, n):
         """
@@ -77,4 +74,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.solveNQueens(5)
+    print s.solveNQueens(4)
