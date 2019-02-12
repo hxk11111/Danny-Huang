@@ -64,7 +64,7 @@ class GroupByFans(object):
 
         dataframe = self.read_dataframe(self.path, self.days_list)
         # dataframe = self.read_dataframe(self.path, ["2017-08-21"])
-        # dataframe = self.spark.read.json("/Users/huangxiangkai/Desktop/script/sina_weibo_fans_data_2017-09-14-01-50.json")
+        # dataframe = self.spark.read.json("/Users/hxk11111/Desktop/script/sina_weibo_fans_data_2017-09-14-01-50.json")
         rdd = self.read_distinct(dataframe).foreachPartition(f)
 
 if __name__ == "__main__":

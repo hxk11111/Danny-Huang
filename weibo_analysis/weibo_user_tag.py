@@ -40,7 +40,7 @@ class WeiboUserTag(object):
         rdd = dataframe.filter('user_tag is not NULL')\
             .select('uid', 'user_tag').rdd
         # local test
-        # rdd = self.spark.read.json("/Users/huangxiangkai/Desktop/script/test.txt").filter(
+        # rdd = self.spark.read.json("/Users/hxk11111/Desktop/script/test.txt").filter(
         #     "blog_id is not NULL and fans != 'None'") \
         #     .select('uid', 'fans', 'publish_time', 'praise', 'repeat', 'forward').rdd
         return rdd

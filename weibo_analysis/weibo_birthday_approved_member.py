@@ -53,7 +53,7 @@ class GroupByFans(object):
             'forward_content is NULL and fans != "None" and icon_approve is not NULL') \
             .select('uid', 'fans').drop_duplicates().rdd
         # local test
-        # rdd = self.spark.read.json("/Users/huangxiangkai/Desktop/script/test.txt").filter(
+        # rdd = self.spark.read.json("/Users/hxk11111/Desktop/script/test.txt").filter(
         #     "blog_id is not NULL and fans != 'None'") \
         #     .select('uid', 'fans', 'publish_time', 'praise', 'repeat', 'forward').rdd
         return rdd

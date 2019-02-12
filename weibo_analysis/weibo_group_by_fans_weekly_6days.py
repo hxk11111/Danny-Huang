@@ -55,7 +55,7 @@ class GroupByFans(object):
             'blog_id is not NULL and fans != "None" and publish_time > "%s" and publish_time < "%s"' % (start, end)) \
             .select('uid', 'fans', 'publish_time', 'praise', 'repeat', 'forward').rdd
         # local test
-        # rdd = self.spark.read.json("/Users/huangxiangkai/Desktop/script/test.txt").filter(
+        # rdd = self.spark.read.json("/Users/hxk11111/Desktop/script/test.txt").filter(
         #     "blog_id is not NULL and fans != 'None'") \
         #     .select('uid', 'fans', 'publish_time', 'praise', 'repeat', 'forward').rdd
         return rdd
@@ -67,7 +67,7 @@ class GroupByFans(object):
         rdd = dataframe.filter("fans != 'None'") \
             .select('uid', 'fans').rdd.distinct()
         # local test
-        # rdd = self.spark.read.json("/Users/huangxiangkai/Desktop/script/test.txt").filter(
+        # rdd = self.spark.read.json("/Users/hxk11111/Desktop/script/test.txt").filter(
         #     "blog_id is not NULL and fans != 'None'") \
         #     .select('uid', 'fans').rdd.distinct()
         return rdd
