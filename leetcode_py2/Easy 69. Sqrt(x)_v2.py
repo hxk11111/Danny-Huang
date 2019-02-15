@@ -48,6 +48,22 @@ class Solution(object):
                 end = mid - 1
         return ans
 
+    def mySqrt2(self, x):
+        start = 0
+        end = x
+        ans = 0
+        while start <= end:
+            mid = (start + end) // 2
+            if mid * mid == x:
+                return mid
+            elif mid * mid < x:
+                start = mid + 1
+                ans = mid
+            else:
+                end = mid - 1
+        return ans
+
+
 if __name__ == '__main__':
     s = Solution()
-    print s.mySqrt(5)
+    print(s.mySqrt2(5))
