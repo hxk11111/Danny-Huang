@@ -7,6 +7,8 @@ This module is provided by
 Date:	2019/2/19
 File:   Medium 313. Super Ugly Number.py
 """
+from typing import List
+
 '''
 Write a program to find the nth super ugly number.
 
