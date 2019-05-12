@@ -57,3 +57,8 @@ class Solution:
             if j == 0:
                 push(i + 1, j)
         return pairs
+
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.kSmallestPairs2(nums1=[1, 3, 4, 7, 11], nums2=[2, 3, 4, 69, 78], k=10))
