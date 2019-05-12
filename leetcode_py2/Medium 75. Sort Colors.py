@@ -51,4 +51,4 @@ if __name__ == '__main__':
     s = Solution()
     l = [2, 0, 1]
     s.sortColors(l)
-    print l
+    print(l)

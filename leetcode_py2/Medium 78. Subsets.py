@@ -29,6 +29,18 @@ Output:
 
 
 class Solution(object):
+    def dfs2(self, result, path, nums):
+        result.append(path[:])
+        for ind in range(len(nums)):
+            path.append(nums[ind])
+            self.dfs2(result, path, nums[ind + 1:])
+            path.pop()
+
+    def subsets2(self, nums):
+        result = []
+        self.dfs2(result, [], nums)
+        return result
+
     def dfs(self, result, path, nums):
         result.append(path[:])
         for ind, num in enumerate(nums):
@@ -48,4 +60,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.subsets([1, 2, 3])
+    print(s.subsets2([1, 2, 3]))

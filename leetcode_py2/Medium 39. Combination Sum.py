@@ -63,4 +63,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.combinationSum([2, 3, 6, 7], 10)
+    print(s.combinationSum([2, 3, 6, 7], 10))

@@ -25,6 +25,34 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 
 
 class Solution(object):
+    def partition(self, nums, start, end):
+        pivot = start
+        nums[pivot], nums[end] = nums[end], nums[pivot]
+        for i in range(start, end):
+            if nums[i] < nums[end]:
+                nums[i], nums[pivot] = nums[pivot], nums[i]
+                pivot += 1
+        nums[pivot], nums[end] = nums[end], nums[pivot]
+        return pivot
+
+    def select(self, nums, start, end, index):
+        pivot = self.partition(nums, start, end)
+        if pivot == index:
+            return nums[pivot]
+        if pivot < index:
+            return self.select(nums, pivot + 1, end, index)
+        else:
+            return self.select(nums, start, pivot - 1, index)
+
+    def findKthLargest_v2(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        ind = len(nums) - k
+        return self.select(nums, 0, len(nums) - 1, ind)
+
     def findKthLargest(self, nums, k):
         """
         :type nums: List[int]
@@ -60,4 +88,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.findKthLargest([2, 1], k=2)
+    print(s.findKthLargest_v2([3, 2, 3, 1, 2, 4, 5, 5, 6], k=4))

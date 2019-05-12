@@ -61,4 +61,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.change(amount=5, coins=[1, 2, 5])
+    print(s.change(amount=5, coins=[1, 2, 5]))

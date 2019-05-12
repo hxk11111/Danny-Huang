@@ -47,4 +47,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.simplifyPath("/a//b////c/d//././/..")
+    print(s.simplifyPath("/a//b////c/d//././/.."))

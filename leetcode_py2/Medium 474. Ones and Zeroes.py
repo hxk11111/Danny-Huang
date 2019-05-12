@@ -58,4 +58,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.findMaxForm(strs={"10", "0", "1"}, m=1, n=1)
+    print(s.findMaxForm(strs={"10", "0", "1"}, m=1, n=1))

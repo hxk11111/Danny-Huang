@@ -74,4 +74,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]])
+    print(s.findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]))

@@ -25,7 +25,8 @@ class Solution(object):
             if str_p[start] == str_p[end]:
                 maxlen = 2 + self.find_longest(str_p, start + 1, end - 1)
             else:
-                maxlen = max(self.find_longest(str_p, start + 1, end), self.find_longest(str_p, start, end - 1))
+                maxlen = max(self.find_longest(str_p, start + 1, end),
+                             self.find_longest(str_p, start, end - 1))
             return maxlen
         else:
             return 0
@@ -48,7 +49,8 @@ class Solution_2(object):
             return 1
         elif start < end:
             if str_p[start] == str_p[end]:
-                res_matrix[start][end] = 2 + self.find_longest(str_p, start + 1, end - 1, res_matrix)
+                res_matrix[start][end] = 2 + self.find_longest(str_p, start + 1, end - 1,
+                                                               res_matrix)
             else:
                 res_matrix[start][end] = max(self.find_longest(str_p, start + 1, end, res_matrix),
                                              self.find_longest(str_p, start, end - 1, res_matrix))

@@ -30,9 +30,9 @@ class Solution(object):
             result.append(nums[:])
             return
         for i in range(from_ind, to_ind):
-                nums[i], nums[from_ind] = nums[from_ind], nums[i]
-                self.permutation(result, nums, from_ind + 1, to_ind)
-                nums[i], nums[from_ind] = nums[from_ind], nums[i]
+            nums[i], nums[from_ind] = nums[from_ind], nums[i]
+            self.permutation(result, nums, from_ind + 1, to_ind)
+            nums[i], nums[from_ind] = nums[from_ind], nums[i]
 
     def permute(self, nums):
         """

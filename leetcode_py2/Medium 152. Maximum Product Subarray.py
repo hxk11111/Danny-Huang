@@ -33,11 +33,12 @@ class Solution(object):
             return
         max_result = largest = least = nums[0]
         for num in nums[1:]:
-            largest, least = max(largest * num, least * num, num), min(largest * num, least * num, num)
+            largest, least = max(largest * num, least * num, num), min(largest * num, least * num,
+                                                                       num)
             max_result = max(max_result, largest)
         return max_result
 
 
 if __name__ == '__main__':
     s = Solution()
-    print s.maxProduct([0, 2])
+    print(s.maxProduct([0, 2]))

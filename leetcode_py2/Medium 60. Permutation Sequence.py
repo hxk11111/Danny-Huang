@@ -56,4 +56,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.getPermutation(4, 9)
+    print(s.getPermutation(4, 9))

@@ -78,4 +78,4 @@ if __name__ == '__main__':
         [1, 3, 1, 5]
     ]
     s.setZeroes(l)
-    print l
+    print(l)

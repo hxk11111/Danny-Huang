@@ -49,4 +49,4 @@ if __name__ == '__main__':
     nums1 = [0, 0, 0, 0, 0, 0]
     nums2 = [2, 5, 6]
     s.merge(nums1, 3, nums2, 3)
-    print nums1
+    print(nums1)

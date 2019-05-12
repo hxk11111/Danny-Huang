@@ -42,4 +42,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.getRow(3)
+    print(s.getRow(3))

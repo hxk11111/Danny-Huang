@@ -53,4 +53,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.plusOne([8, 9, 9, 9])
+    print(s.plusOne([8, 9, 9, 9]))

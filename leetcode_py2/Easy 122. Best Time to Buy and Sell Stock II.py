@@ -58,7 +58,25 @@ class Solution(object):
         max_profit += last_price - min_price
         return max_profit
 
+    def maxProfit2(self, prices):
+        if not prices:
+            return 0
+        total_profit = 0
+        single_max_profit = 0
+        last_price = prices[0]
+        for price in prices:
+            if price >= last_price:
+                single_max_profit += price - last_price
+            else:
+                total_profit += single_max_profit
+                single_max_profit = 0
+            last_price = price
+        if single_max_profit > 0:
+            total_profit += single_max_profit
+        return total_profit
+
 
 if __name__ == '__main__':
     s = Solution()
-    print s.maxProfit([7, 6, 4, 3, 1])
+    print(s.maxProfit([7, 1, 5, 3, 6, 4]))
+    print(s.maxProfit2([7, 1, 5, 3, 6, 4]))

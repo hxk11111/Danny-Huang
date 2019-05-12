@@ -37,6 +37,30 @@ There are two ways to reach the bottom-right corner:
 
 
 class Solution(object):
+    def uniquePathsWithObstacles2(self, obstacleGrid):
+        """
+        :type obstacleGrid: List[List[int]]
+        :rtype: int
+        """
+        dp = [[0 for _ in range(len(obstacleGrid[0]))] for _ in range(len(obstacleGrid))]
+        if obstacleGrid[0][0] == 1:
+            dp[0][0] = 0
+        else:
+            dp[0][0] = 1
+        for i in range(len(obstacleGrid)):
+            for j in range(len(obstacleGrid[0])):
+                if i == 0 and j == 0:
+                    continue
+                elif obstacleGrid[i][j] == 1:
+                    dp[i][j] = 0
+                elif i == 0 and j > 0:
+                    dp[i][j] = dp[i][j - 1]
+                elif i > 0 and j == 0:
+                    dp[i][j] = dp[i - 1][j]
+                else:
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        return dp[-1][-1]
+
     def uniquePathsWithObstacles(self, obstacleGrid):
         """
         :type obstacleGrid: List[List[int]]
@@ -62,4 +86,13 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    print s.uniquePathsWithObstacles([[1, 0]])
+    print(s.uniquePathsWithObstacles([
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ]))
+    print(s.uniquePathsWithObstacles2([
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ]))
